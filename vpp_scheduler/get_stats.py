@@ -1,5 +1,3 @@
-#A script to get statistics of vpps
-
 from vpp_papi.vpp_stats import VPPStats
 import time
 import os

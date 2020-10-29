@@ -1,5 +1,3 @@
-#A simple script to get the number of physical cores in the system
-
 from cpu_cores import CPUCoresCounter
 import os
 

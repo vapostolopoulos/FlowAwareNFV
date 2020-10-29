@@ -1,5 +1,3 @@
-#A script to clean all vpps in the system, including sockets etc
-
 ps -ef | grep vpp | awk '{print $2}'| xargs sudo kill
 sudo rm -rf /run/vpp/cli-*
 sudo rm -rf /run/vpp/stats-*
