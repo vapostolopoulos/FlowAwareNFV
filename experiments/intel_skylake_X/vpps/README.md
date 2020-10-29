@@ -27,15 +27,15 @@ you would like to send traffic through T-REX:
 
 $ sudo vppctl -s /run/vpp/cli-vpprouter1.sock 
  
- Add routes to group 1,2,3 respectively:
-	vpp# ip route add 16.0.0.0/8 via 10.10.3.2 [weight n]
-	vpp# ip route add 16.0.0.0/8 via 10.10.6.2 [weight n]
-	vpp# ip route add 16.0.0.0/8 via 10.10.12.2 [weight n]
+Add routes to group 1,2,3 respectively:
+1. vpp# ip route add 16.0.0.0/8 via 10.10.3.2 [weight n]
+2. vpp# ip route add 16.0.0.0/8 via 10.10.6.2 [weight n]
+3. vpp# ip route add 16.0.0.0/8 via 10.10.12.2 [weight n]
 
- Delete routes to group1,2,3 respectively:
-	vpp# ip route delete 16.0.0.0/8 via 10.10.3.2 [weight n]
-	vpp# ip route delete 16.0.0.0/8 via 10.10.6.2 [weight n]
-	vpp# ip route delete 16.0.0.0/8 via 10.10.12.2 [weight n]
+Delete routes to group1,2,3 respectively:
+1. vpp# ip route delete 16.0.0.0/8 via 10.10.3.2 [weight n]
+2. vpp# ip route delete 16.0.0.0/8 via 10.10.6.2 [weight n]
+3. vpp# ip route delete 16.0.0.0/8 via 10.10.12.2 [weight n]
 
 
 
@@ -49,28 +49,28 @@ the group you would like to ping:
 -vpprouter1
 $ sudo vppctl -s /run/vpp/cli-vpprouter1.sock 
 
- Add routes to group 1,2,3 respectively:
-	vpp# ip route add 10.10.2.0/24 via 10.10.3.2
-	vpp# ip route add 10.10.2.0/24 via 10.10.6.2
-	vpp# ip route add 10.10.2.0/24 via 10.10.12.2
+Add routes to group 1,2,3 respectively:
+1. vpp# ip route add 10.10.2.0/24 via 10.10.3.2
+2. vpp# ip route add 10.10.2.0/24 via 10.10.6.2
+3. vpp# ip route add 10.10.2.0/24 via 10.10.12.2
 
- Delete routes to group1,2,3 respectively:
-	vpp# ip route delete 10.10.2.0/24 via 10.10.3.2
-	vpp# ip route delete 10.10.2.0/24 via 10.10.6.2
-	vpp# ip route delete 10.10.2.0/24 via 10.10.12.2
+Delete routes to group1,2,3 respectively:
+1. vpp# ip route delete 10.10.2.0/24 via 10.10.3.2
+2. vpp# ip route delete 10.10.2.0/24 via 10.10.6.2
+3. vpp# ip route delete 10.10.2.0/24 via 10.10.12.2
 
 -vpprouter2
 $ sudo vppctl -s /run/vpp/cli-vpprouter2.sock 
 
- Add routes to group 1,2,3 respectively:
-	vpp# ip route add 10.10.1.0/24 via 10.10.2.4
-	vpp# ip route add 10.10.1.0/24 via 10.10.11.1
-	vpp# ip route add 10.10.1.0/24 via 10.10.19.1
+Add routes to group 1,2,3 respectively:
+1. vpp# ip route add 10.10.1.0/24 via 10.10.2.4
+2. vpp# ip route add 10.10.1.0/24 via 10.10.11.1
+3. vpp# ip route add 10.10.1.0/24 via 10.10.19.1
 
- Delete routes to group1,2,3 respectively:
-	vpp# ip route delete 10.10.1.0/24 via 10.10.2.4
-	vpp# ip route delete 10.10.1.0/24 via 10.10.11.1
-	vpp# ip route delete 10.10.1.0/24 via 10.10.19.1
+Delete routes to group1,2,3 respectively:
+1. vpp# ip route delete 10.10.1.0/24 via 10.10.2.4
+2. vpp# ip route delete 10.10.1.0/24 via 10.10.11.1
+3. vpp# ip route delete 10.10.1.0/24 via 10.10.19.1
 
 Test connecticity from host:
 $ ping 10.10.2.3
