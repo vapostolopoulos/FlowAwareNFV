@@ -11,6 +11,9 @@ for forwarding back the traffic.
 
 You can launch whatever combination you want but each group must be whole. 
 
+IMPORANT: Vpps are preconfigured to be placed in a "ping pong" scenario between
+NUMA nodes for testing purposes.
+
 You have to manually launch each vpp e.g. ./vpprouter1.conf, ./vpprouter2.conf,
 vpp1.conf, etc. After launching router1,2 and the group(s) you want you must 
 add static routes to vpprouter1 and 2. This is done for testing purposes and 
