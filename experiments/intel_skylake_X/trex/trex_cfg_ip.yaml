@@ -1,6 +1,6 @@
 - port_limit: 2
   version: 2
-  interfaces: ['86:00.0', '86:00.1']
+  interfaces: ['88:00.0', '88:00.1']
   port_info:
       - ip: 10.10.1.2
         default_gw: 10.10.1.3
