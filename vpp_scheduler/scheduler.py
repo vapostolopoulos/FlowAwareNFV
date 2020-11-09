@@ -136,11 +136,13 @@ while 1:
     for vppgroup in inputlist:
         key = str(vppgroup)
         packets = 0
+        length = len(vppgroup)
         for vpp in vppgroup:
             packets += vppDict[vpp]['packets']
-        vppgroupDict[key] = {'packets': packets / len(vppgroup), 'numa_to_pin': -1}
+        vppgroupDict[key] = {'packets': packets / length, 'numa_to_pin': -1, 'length': length}
 
-    sortedList = [x[0] for x in sorted(vppgroupDict.items(), key=lambda item: item[1]['packets'], reverse=True)]
+
+    sortedList = [x[0] for x in sorted(vppgroupDict.items(), key=lambda item: (item[1]['packets'], item[1]['length']), reverse=True)]
 
 ################################################################################
 
