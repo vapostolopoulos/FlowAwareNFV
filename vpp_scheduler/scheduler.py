@@ -13,30 +13,33 @@ import time
 #
 
 # hera
-'''
+# Hyperthreaded unwanted, thus on global_cpu_info we mark every second row with unavailibality
 global_cpu_info = [
                     [0, 0, 1], [1, 0, 1], [2, 0, 1], [3, 0, 0],
-                   # [4, 0, 0], [5, 0, 0], [6, 0, 0], [7, 0, 0],
+                    [4, 0, 1], [5, 0, 1], [6, 0, 1], [7, 0, 1],
 
                     [8, 1, 0], [9, 1, 0], [10, 1, 0], [11, 1, 0],
-                   # [12, 1, 0], [13, 1, 0], [14, 1, 0], [15, 1, 0],
+                    [12, 1, 1], [13, 1, 1], [14, 1, 1], [15, 1, 1],
 
                     [16, 2, 0], [17, 2, 0], [18, 2, 0], [19, 2, 0],
-                   # [20, 2, 0], [21, 2, 0], [22, 2, 0], [23, 2, 0],
+                    [20, 2, 1], [21, 2, 1], [22, 2, 1], [23, 2, 1],
 
                     [24, 3, 0], [25, 3, 0], [26, 3, 0], [27, 3, 0],
-                   # [28, 3, 0], [29, 3, 0], [30, 3, 0], [31, 3, 0]
+                    [28, 3, 1], [29, 3, 1], [30, 3, 1], [31, 3, 1]
                 ]
 
 numa_node_latencies = [
-                        [0, 1, 3, 2],
-                        [1, 2, 0, 3],
-                        [2, 1, 3, 0],
-                        [3, 0, 2, 1]
+                        [0, 1, 2, 3],
+                        [1, 0, 2, 3],
+                        [2, 0, 1, 3],
+                        [3, 0, 1, 2]
                     ]
-'''
 
-#intel skylake
+numa_node_close_to_card = 0
+
+'''
+# intel skylake
+# Hyperthreaded unwanted, thus on global_cpu_info we don't include siblings 48-71 of 0-23 and 72-95 of 24-47
 global_cpu_info = [
                     [0, 0, 1], [1, 0, 1], [2, 0, 1], [3, 0, 0],
                     [4, 0, 0], [5, 0, 0], [6, 0, 0], [7, 0, 0],
@@ -59,6 +62,7 @@ numa_node_latencies = [
                     ]
 
 numa_node_close_to_card = 0
+'''
 
 s = set()
 for cpu in global_cpu_info:
@@ -68,10 +72,15 @@ for cpu in global_cpu_info:
     if cpu[2] == 0:
         global_count_numa_cpus[cpu[1]] += 1
 
-old_sorted_list = []
 cpu_info = deepcopy(global_cpu_info)
 count_numa_cpus = deepcopy(global_count_numa_cpus)
 old_vppDict = {}
+
+farest_numa_node_from_card = numa_node_latencies[numa_node_close_to_card][-1]
+farest_cpu = -1
+for cpu in global_cpu_info:
+    if cpu[1] == farest_numa_node_from_card and cpu[2] == 0:
+        farest_cpu = cpu[0]
 
 ################################################################################
 
@@ -165,12 +174,12 @@ while 1:
 
             for vpp_to_schedule in vppgroup_to_schedule:
                 if vppDict[vpp_to_schedule]['packets'] == 0:
-                    vppDict[vpp_to_schedule]['scheduled'] = 31
-                    # Actually pin vpp to cpu 31 here
-                    if 31 != old_vppDict[vpp_to_schedule]['scheduled']:
+                    vppDict[vpp_to_schedule]['scheduled'] = farest_cpu
+                    # Actually pin vpp to farest_cpu here
+                    if farest_cpu != old_vppDict[vpp_to_schedule]['scheduled']:
                         p = psutil.Process(vppDict[vpp_to_schedule]['pid'])
-                        p.cpu_affinity([31])
-                        print(f"{vpp_to_schedule} scheduled to cpu 31")
+                        p.cpu_affinity([farest_cpu])
+                        print(f"{vpp_to_schedule} scheduled to cpu {farest_cpu}")
                         print_flag = True
 
                 elif vppDict[vpp_to_schedule]['scheduled'] != -1:
@@ -211,13 +220,12 @@ while 1:
                                     vppgroupDict[str(vpp_group)]['numa_to_pin'] \
                                         = vppgroupDict[str(vppgroup_to_schedule)]['numa_to_pin']
                     else:
-                        print(f"No more CPUs available! {vpp_to_schedule} has been scheduled to cpu 31 :(")
+                        print(f"No more CPUs available! {vpp_to_schedule} has been scheduled to cpu {farest_cpu} :(")
                         # Actually pin vpp to cpu 31
                         p = psutil.Process(vppDict[vpp_to_schedule]['pid'])
-                        p.cpu_affinity([31])
+                        p.cpu_affinity([farest_cpu])
                         print_flag = True
 
-    old_sorted_list = deepcopy(sortedList)
     cpu_info = deepcopy(global_cpu_info)
     count_numa_cpus = deepcopy(global_count_numa_cpus)
 
