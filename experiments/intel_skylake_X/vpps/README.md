@@ -28,14 +28,14 @@ you would like to send traffic through T-REX:
 $ sudo vppctl -s /run/vpp/cli-vpprouter1.sock 
  
 Add routes to group 1,2,3 respectively:
-1. vpp# ip route add 16.0.0.0/8 via 10.10.3.2 [weight n]
-2. vpp# ip route add 16.0.0.0/8 via 10.10.6.2 [weight n]
-3. vpp# ip route add 16.0.0.0/8 via 10.10.12.2 [weight n]
+1. vpp# ip route add 48.0.0.0/8 via 10.10.3.2 [weight n]
+2. vpp# ip route add 48.0.0.0/8 via 10.10.6.2 [weight n]
+3. vpp# ip route add 48.0.0.0/8 via 10.10.12.2 [weight n]
 
 Delete routes to group1,2,3 respectively:
-1. vpp# ip route delete 16.0.0.0/8 via 10.10.3.2 [weight n]
-2. vpp# ip route delete 16.0.0.0/8 via 10.10.6.2 [weight n]
-3. vpp# ip route delete 16.0.0.0/8 via 10.10.12.2 [weight n]
+1. vpp# ip route delete 48.0.0.0/8 via 10.10.3.2 [weight n]
+2. vpp# ip route delete 48.0.0.0/8 via 10.10.6.2 [weight n]
+3. vpp# ip route delete 48.0.0.0/8 via 10.10.12.2 [weight n]
 
 
 
