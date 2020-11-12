@@ -12,6 +12,7 @@ import time
 # $ lscpu -e=cpu, node
 #
 
+'''
 # hera
 # Hyperthreaded unwanted, thus on global_cpu_info we mark every second row with unavailibality
 global_cpu_info = [
@@ -43,10 +44,10 @@ numa_node_close_to_card = 0
 global_cpu_info = [
                     [0, 0, 1], [1, 0, 1], [2, 0, 1], [3, 0, 0],
                     [4, 0, 0], [5, 0, 0], [6, 0, 0], [7, 0, 0],
-                    [8, 0, 0], [9, 0, 0], [10, 0, 0], [11, 0, 0],
-                    [12, 0, 0], [13, 0, 0], [14, 0, 0], [15, 0, 0],
-                    [16, 0, 0], [17, 0, 0], [18, 0, 0], [19, 0, 0],
-                    [20, 0, 0], [21, 0, 0], [22, 0, 0], [23, 0, 0],
+                    [8, 0, 0], [9, 0, 0], [10, 0, 1], [11, 0, 1],
+                    [12, 0, 1], [13, 0, 1], [14, 0, 1], [15, 0, 1],
+                    [16, 0, 1], [17, 0, 1], [18, 0, 1], [19, 0, 1],
+                    [20, 0, 1], [21, 0, 1], [22, 0, 1], [23, 0, 1],
                                                       
                     [24, 1, 0], [25, 1, 0], [26, 1, 0], [27, 1, 0],
                     [28, 1, 0], [29, 1, 0], [30, 1, 0], [31, 1, 0],
@@ -62,7 +63,7 @@ numa_node_latencies = [
                     ]
 
 numa_node_close_to_card = 0
-'''
+
 
 s = set()
 for cpu in global_cpu_info:
@@ -175,6 +176,7 @@ while 1:
                     vppgroupDict[str(vppgroup_to_schedule)]['numa_to_pin'] = -1
 
             for vpp_to_schedule in vppgroup_to_schedule:
+                '''
                 if vppDict[vpp_to_schedule]['packets'] == 0:
                     vppDict[vpp_to_schedule]['scheduled'] = farest_cpu
                     # Actually pin vpp to farest_cpu here
@@ -183,8 +185,8 @@ while 1:
                         p.cpu_affinity([farest_cpu])
                         print(f"{vpp_to_schedule} scheduled to cpu {farest_cpu}")
                         print_flag = True
-
-                elif vppDict[vpp_to_schedule]['scheduled'] != -1:
+                '''
+                if vppDict[vpp_to_schedule]['scheduled'] != -1:
                     continue
                 else:
                     cpu_to_pin = -1
