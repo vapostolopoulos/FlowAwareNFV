@@ -61,6 +61,7 @@ def trex_stats (c, tx_port, rx_port):
         f.write("rx_stats:>" + str(rx_port_dict) + "\n")
         f.write("global_stats:>" + str(stats_dict) + "\n")
         f.write("histogram_json:>" + str(fix_hist_format(hist)) + "\n")
+        print("Average: {}".format(avg)) 
 
         return True
     finally:
