@@ -1,3 +1,2 @@
-export PYTHONPATH=../v2.65/automation/trex_control_plane/interactive/trex/:$PYTHONPATH
-export PYTHONPATH=../v2.65/automation/trex_control_plane/interactive/trex/examples/stl:$PYTHONPATH
-
+export PYTHONPATH=/home/user/vanias/v2.65/automation/trex_control_plane/interactive/trex/:$PYTHONPATH
+export PYTHONPATH=/home/user/vanias/v2.65/automation/trex_control_plane/interactive/trex/examples/stl:$PYTHONPATH
