@@ -23,5 +23,3 @@ for i in range(10):
     time.sleep(10)
     os.system(f"sudo vppctl -s /run/vpp/cli-vpprouter1.sock ip route del 48.0.0.0/8 via 10.10.3.2 weight {a}")
     os.system(f"sudo vppctl -s /run/vpp/cli-vpprouter1.sock ip route del 48.0.0.0/8 via 10.10.6.2 weight {b}")
-os.system("../vpps/add3.sh")
-os.system("../vpps/add5.sh")
