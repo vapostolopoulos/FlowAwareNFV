@@ -43,7 +43,7 @@ numa_node_close_to_card = 0
 # Hyperthreaded unwanted, thus on global_cpu_info we don't include siblings 48-71 of 0-23 and 72-95 of 24-47
 global_cpu_info = [
                     [0, 0, 1], [1, 0, 0], [2, 0, 0], [3, 0, 0],
-                    [4, 0, 1], [5, 0, 1], [6, 0, 1], [7, 0, 1],
+                    [4, 0, 0], [5, 0, 0], [6, 0, 1], [7, 0, 1],
                     [8, 0, 1], [9, 0, 1], [10, 0, 1], [11, 0, 1],
                     [12, 0, 1], [13, 0, 1], [14, 0, 1], [15, 0, 1],
                     [16, 0, 1], [17, 0, 1], [18, 0, 1], [19, 0, 1],
@@ -176,6 +176,7 @@ while 1:
                     vppgroupDict[str(vppgroup_to_schedule)]['numa_to_pin'] = -1
 
             for vpp_to_schedule in vppgroup_to_schedule:
+                """
                 if vppDict[vpp_to_schedule]['packets'] == 0:
                     vppDict[vpp_to_schedule]['scheduled'] = farest_cpu
                     # Actually pin vpp to farest_cpu here
@@ -184,6 +185,7 @@ while 1:
                         p.cpu_affinity([farest_cpu])
                         print(f"{vpp_to_schedule} scheduled to cpu {farest_cpu}")
                         print_flag = True
+                """
                 if vppDict[vpp_to_schedule]['scheduled'] != -1:
                     continue
                 else:
@@ -237,6 +239,6 @@ while 1:
     for vpp in vppDict:
         old_vppDict[vpp]['packets'] += vppDict[vpp]['packets']
         old_vppDict[vpp]['scheduled'] = vppDict[vpp]['scheduled']
-    time.sleep(0.1)
+    time.sleep(1)
 
 ################################################################################
